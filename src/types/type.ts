@@ -1,10 +1,8 @@
 import { Request } from 'express';
-
 export interface Code {
   Code: string;
   discountPercentage: number;
 }
-
 export interface Product {
   id: number;
   title: string;
@@ -18,12 +16,10 @@ export interface Product {
   thumbnail: string;
   images: string[];
 }
-
 export interface CartItem {
   item: Product;
   quantity: number;
 }
-
 export interface CustomRequest extends Request {
   lineitems?: {
     price_data: {
@@ -37,3 +33,19 @@ export interface CustomRequest extends Request {
     quantity: number;
   }[];
 }
+export interface StatusCodeMap {
+  [message: string]: number;
+}
+export interface RegisterPayload{
+  first_name: string;
+  last_name: string;
+  gender: string;
+  email: string;
+  password: string;
+  is_seller: boolean;
+}
+export interface LoginPayload{
+  email:string, 
+  password:string
+}
+

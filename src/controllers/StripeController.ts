@@ -1,8 +1,7 @@
 import { CustomRequest } from '../types/type';
 import { Response } from 'express';
 import Stripe from 'stripe';
-import dotenv from 'dotenv';
-dotenv.config();
+import { handleResponses } from '../utils/utils';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
@@ -20,8 +19,8 @@ export const stripeSession = async (req: CustomRequest, res: Response) => {
       cancel_url: process.env.CANCEL_URL,
     });
     res.json({ id: session.id });
-  } catch (error) {
+  } catch (error:any) {
     console.log(error);
-    res.status(500).send('Error occurred while creating session');
+    return handleResponses(res, error.message, 'Internal_Server_Error');
   }
 };

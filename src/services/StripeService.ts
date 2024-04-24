@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import { CartItem, CustomRequest } from '../types/type';
-import COUPENCODE from '../utils/utils';
+import {COUPENCODE, handleResponses} from '../utils/utils';
 
 export const StripService = (req: CustomRequest , res: Response, next: NextFunction) => {
   try {
@@ -38,6 +38,7 @@ export const StripService = (req: CustomRequest , res: Response, next: NextFunct
     req.lineitems = lineItems;
     next();
   } catch (error: any) {
-    return res.status(500).json({msg:'Internal Server Error'});
+
+    return handleResponses(res, error.message, 'Internal_Server_Error');
   }
 };
