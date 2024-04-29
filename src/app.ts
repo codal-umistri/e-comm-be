@@ -1,9 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config({ path: __dirname + '../.env' });
 import express from 'express';
 import router from './routes/routes';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import {knexInstance} from './config/dbconfig';
-dotenv.config();
 
 
 const app = express();
@@ -14,7 +14,7 @@ app.use(express.json());
 
 //Router
 app.use('/api/v1',router);
-
+  
 //DB Connection
 knexInstance.on('start', () => {
   console.log('Connected to the database!');

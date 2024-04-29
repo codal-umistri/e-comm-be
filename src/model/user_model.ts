@@ -2,6 +2,12 @@ import {bookshelfInstance} from '../config/dbconfig';
 
 
 class User extends bookshelfInstance.Model<User> {
+  type!: number;
+  first_name!: string;
+  last_name!:string;
+  password!:string;
+
+
   get tableName() {
     return 'users';
   }

@@ -1,8 +1,12 @@
 import { NextFunction, Response } from 'express';
 import { CartItem, CustomRequest } from '../types/type';
-import {COUPENCODE, handleResponses} from '../utils/utils';
+import { COUPENCODE, handleResponses } from '../utils/utils';
 
-export const StripService = (req: CustomRequest , res: Response, next: NextFunction) => {
+export const StripHelper = (
+  req: CustomRequest,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const {
       products,
@@ -38,7 +42,7 @@ export const StripService = (req: CustomRequest , res: Response, next: NextFunct
     req.lineitems = lineItems;
     next();
   } catch (error: any) {
-
+    console.log('instripe helper');
     return handleResponses(res, error.message, 'Internal_Server_Error');
   }
 };

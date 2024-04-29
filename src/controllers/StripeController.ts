@@ -2,10 +2,12 @@ import { CustomRequest } from '../types/type';
 import { Response } from 'express';
 import Stripe from 'stripe';
 import { handleResponses } from '../utils/utils';
-
+// import dotenv from 'dotenv';
+// dotenv.config();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
-
+// console.log(process.env.STRIPE_SECRET_KEY);
 export const stripeSession = async (req: CustomRequest, res: Response) => {
+ 
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -24,3 +26,6 @@ export const stripeSession = async (req: CustomRequest, res: Response) => {
     return handleResponses(res, error.message, 'Internal_Server_Error');
   }
 };
+
+
+
