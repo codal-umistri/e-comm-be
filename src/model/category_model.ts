@@ -1,10 +1,8 @@
 import {bookshelfInstance} from '../config/dbconfig';
-
-
-class Seller extends bookshelfInstance.Model<Seller>{
+class Category extends bookshelfInstance.Model<Category>{
   get tableName() {
-    return 'seller_information';
+    return 'category';
   }
 }
 
-export default Seller;
+export default Category;

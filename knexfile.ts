@@ -1,5 +1,6 @@
 import path from 'path';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const knexConfig = {
@@ -13,6 +14,9 @@ const knexConfig = {
   migrations: {
     directory: path.resolve(__dirname, 'src', 'migrations'),
   },
+  seeds:{
+    directory: path.resolve(__dirname, 'src', 'seed'),
+  }
 };
 
 export default knexConfig;

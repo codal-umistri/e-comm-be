@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments('id').primary();
     table.integer('product_id').unsigned().notNullable();
     table.foreign('product_id').references('products.id').onDelete('CASCADE');
-    table.binary('image_data').notNullable(); 
+    table.text('image_data').notNullable(); 
     table.timestamps(true, true);     
   });
 }

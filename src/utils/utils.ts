@@ -1,7 +1,7 @@
 import User from '../model/user_model';
 import { Code, ResponseObj, StatusCodeMap } from '../types/type';
 import jwt from 'jsonwebtoken';
-import { Request, Response, NextFunction } from 'express';
+import { Response} from 'express';
 
 const StatusCode: StatusCodeMap = {
   'Success': 200,
@@ -75,7 +75,6 @@ export const loginHelper = (
   res: Response,
   user: User,
   IsLogin: number = 1,
-  file?: any
 ) => {
   const secretKey = process.env.SECRET_KEY;
   const token = jwt.sign({ id: user.get('id') }, secretKey as string, {
@@ -104,7 +103,8 @@ export const loginHelper = (
     );
   }
   else {
-    return handleResponses(res,'Seller registration successful.','Created',{ token, name: user.get('first_name'), type: user.get('type') });
+    return handleResponses(res,'Seller registration successful.','Created',undefined,
+      undefined,{ token, name: user.get('first_name'), type: user.get('type') });
   }
 };
 
