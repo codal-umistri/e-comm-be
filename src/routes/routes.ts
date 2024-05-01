@@ -6,6 +6,7 @@ import { registerSeller } from '../controllers/SellerController';
 import { upload } from '../services/Multer';
 import { GdriveService } from '../services/GdriveService';
 import { StripHelper } from '../services/StripeHelper';
+import { product } from '../controllers/ProductsController';
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.post('/create-checkout-session', StripHelper , stripeSession);
 router.post('/register', validateRegisterInputs, registerUser);
 router.post('/login', validateLoginInputs, loginUser);
 router.post('/seller', upload.any(), validateSellerInputs, GdriveService, registerSeller);
+router.get('/products',product);
 
 export default router;
 
