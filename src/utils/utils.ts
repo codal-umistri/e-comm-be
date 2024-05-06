@@ -51,15 +51,20 @@ export const handleValidationError = (res: Response, ErrorMessage: string) => {
   return res.status(StatusCode.Bad_Request).json({ message: ErrorMessage });
 };
 
-export const handleResponses = (
+export const handleResponse = (
   res: Response,
   message: string,
   status: string,
+  success: boolean,
+  error_code?:string,
   item?: any,
   itemname: string = 'item',
   obj?:any
+  
 ) => {
-  const responseObj: ResponseObj = { message };
+  let responseObj:ResponseObj;
+
+  error_code ? responseObj = { message , success, error_code} : responseObj = { message , success, error_code};
   
   if (item !== undefined) {
     responseObj[itemname] = item.toJSON ? item.toJSON() : item;
@@ -78,13 +83,15 @@ export const loginHelper = (
 ) => {
   const secretKey = process.env.SECRET_KEY;
   const token = jwt.sign({ id: user.get('id') }, secretKey as string, {
-    expiresIn: '2d',
+    expiresIn: '3h',
   });
 
   if (IsLogin === 1) {
-    return handleResponses(
+    return handleResponse(
       res,
       'Login successful',
+      'Success',
+      true,
       'Success',
       undefined,
       undefined,
@@ -93,9 +100,11 @@ export const loginHelper = (
   }
   else if(IsLogin === 0)
   {
-    return handleResponses(
+    return handleResponse(
       res,
       'User registered successfully',
+      'Created',
+      true,
       'Created',
       user,
       'user',
@@ -103,7 +112,7 @@ export const loginHelper = (
     );
   }
   else {
-    return handleResponses(res,'Seller registration successful.','Created',undefined,
+    return handleResponse(res,'Seller registration successful.','Created', true,'Created',undefined,
       undefined,{ token, name: user.get('first_name'), type: user.get('type') });
   }
 };

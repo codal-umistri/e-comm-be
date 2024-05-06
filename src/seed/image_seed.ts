@@ -9,7 +9,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/1/2.jpg',
         'https://cdn.dummyjson.com/product-images/1/3.jpg',
         'https://cdn.dummyjson.com/product-images/1/4.jpg',
-        'https://cdn.dummyjson.com/product-images/1/// thumbnail.jpg',
       ],
     },
     {
@@ -18,7 +17,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/2/1.jpg',
         'https://cdn.dummyjson.com/product-images/2/2.jpg',
         'https://cdn.dummyjson.com/product-images/2/3.jpg',
-        'https://cdn.dummyjson.com/product-images/2/// thumbnail.jpg',
       ],
     },
     {
@@ -32,7 +30,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/4/2.jpg',
         'https://cdn.dummyjson.com/product-images/4/3.jpg',
         'https://cdn.dummyjson.com/product-images/4/4.jpg',
-        'https://cdn.dummyjson.com/product-images/4/// thumbnail.jpg',
       ],
     },
     {
@@ -58,7 +55,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/7/1.jpg',
         'https://cdn.dummyjson.com/product-images/7/2.jpg',
         'https://cdn.dummyjson.com/product-images/7/3.jpg',
-        'https://cdn.dummyjson.com/product-images/7/// thumbnail.jpg',
       ],
     },
     {
@@ -68,7 +64,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/8/2.jpg',
         'https://cdn.dummyjson.com/product-images/8/3.jpg',
         'https://cdn.dummyjson.com/product-images/8/4.jpg',
-        'https://cdn.dummyjson.com/product-images/8/// thumbnail.jpg',
       ],
     },
     {
@@ -78,7 +73,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/9/2.png',
         'https://cdn.dummyjson.com/product-images/9/3.png',
         'https://cdn.dummyjson.com/product-images/9/4.jpg',
-        'https://cdn.dummyjson.com/product-images/9/// thumbnail.jpg',
       ],
     },
     {
@@ -87,7 +81,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/10/1.jpg',
         'https://cdn.dummyjson.com/product-images/10/2.jpg',
         'https://cdn.dummyjson.com/product-images/10/3.jpg',
-        'https://cdn.dummyjson.com/product-images/10/// thumbnail.jpeg',
       ],
     },
     {
@@ -96,7 +89,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/11/1.jpg',
         'https://cdn.dummyjson.com/product-images/11/2.jpg',
         'https://cdn.dummyjson.com/product-images/11/3.jpg',
-        'https://cdn.dummyjson.com/product-images/11/// thumbnail.jpg',
       ],
     },
     {
@@ -106,7 +98,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/12/2.jpg',
         'https://cdn.dummyjson.com/product-images/12/3.png',
         'https://cdn.dummyjson.com/product-images/12/4.jpg',
-        'https://cdn.dummyjson.com/product-images/12/// thumbnail.jpg',
       ],
     },
     {
@@ -116,7 +107,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/13/2.png',
         'https://cdn.dummyjson.com/product-images/13/3.jpg',
         'https://cdn.dummyjson.com/product-images/13/4.jpg',
-        'https://cdn.dummyjson.com/product-images/13/// thumbnail.webp',
       ],
     },
     {
@@ -125,7 +115,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/14/1.jpg',
         'https://cdn.dummyjson.com/product-images/14/2.jpg',
         'https://cdn.dummyjson.com/product-images/14/3.jpg',
-        'https://cdn.dummyjson.com/product-images/14/// thumbnail.jpg',
       ],
     },
     {
@@ -135,7 +124,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/15/2.jpg',
         'https://cdn.dummyjson.com/product-images/15/3.jpg',
         'https://cdn.dummyjson.com/product-images/15/4.jpg',
-        'https://cdn.dummyjson.com/product-images/15/// thumbnail.jpg',
       ],
     },
     {
@@ -145,7 +133,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/16/2.webp',
         'https://cdn.dummyjson.com/product-images/16/3.jpg',
         'https://cdn.dummyjson.com/product-images/16/4.jpg',
-        'https://cdn.dummyjson.com/product-images/16/// thumbnail.jpg',
       ],
     },
     {
@@ -154,7 +141,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/17/1.jpg',
         'https://cdn.dummyjson.com/product-images/17/2.jpg',
         'https://cdn.dummyjson.com/product-images/17/3.jpg',
-        'https://cdn.dummyjson.com/product-images/17/// thumbnail.jpg',
       ],
     },
     {
@@ -164,7 +150,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/18/2.jpg',
         'https://cdn.dummyjson.com/product-images/18/3.jpg',
         'https://cdn.dummyjson.com/product-images/18/4.jpg',
-        'https://cdn.dummyjson.com/product-images/18/// thumbnail.jpg',
       ],
     },
     {
@@ -173,7 +158,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/19/1.jpg',
         'https://cdn.dummyjson.com/product-images/19/2.jpg',
         'https://cdn.dummyjson.com/product-images/19/3.png',
-        'https://cdn.dummyjson.com/product-images/19/// thumbnail.jpg',
       ],
     },
     {
@@ -183,7 +167,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/20/2.jpg',
         'https://cdn.dummyjson.com/product-images/20/3.jpg',
         'https://cdn.dummyjson.com/product-images/20/4.jpg',
-        'https://cdn.dummyjson.com/product-images/20/// thumbnail.jpg',
       ],
     },
     {
@@ -209,7 +192,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/23/2.jpg',
         'https://cdn.dummyjson.com/product-images/23/3.jpg',
         'https://cdn.dummyjson.com/product-images/23/4.jpg',
-        'https://cdn.dummyjson.com/product-images/23/// thumbnail.jpg',
       ],
     },
     {
@@ -219,7 +201,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/24/2.jpg',
         'https://cdn.dummyjson.com/product-images/24/3.jpg',
         'https://cdn.dummyjson.com/product-images/24/4.jpg',
-        'https://cdn.dummyjson.com/product-images/24/// thumbnail.jpg',
       ],
     },
     {
@@ -229,7 +210,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/25/2.jpg',
         'https://cdn.dummyjson.com/product-images/25/3.png',
         'https://cdn.dummyjson.com/product-images/25/4.jpg',
-        'https://cdn.dummyjson.com/product-images/25/// thumbnail.jpg',
       ],
     },
     {
@@ -240,7 +220,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/26/3.jpg',
         'https://cdn.dummyjson.com/product-images/26/4.jpg',
         'https://cdn.dummyjson.com/product-images/26/5.jpg',
-        'https://cdn.dummyjson.com/product-images/26/// thumbnail.jpg',
       ],
     },
     {
@@ -250,7 +229,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/27/2.jpg',
         'https://cdn.dummyjson.com/product-images/27/3.jpg',
         'https://cdn.dummyjson.com/product-images/27/4.jpg',
-        'https://cdn.dummyjson.com/product-images/27/// thumbnail.webp',
       ],
     },
     {
@@ -260,7 +238,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/28/2.jpg',
         'https://cdn.dummyjson.com/product-images/28/3.png',
         'https://cdn.dummyjson.com/product-images/28/4.jpg',
-        'https://cdn.dummyjson.com/product-images/28/// thumbnail.jpg',
       ],
     },
     {
@@ -270,7 +247,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/29/2.jpg',
         'https://cdn.dummyjson.com/product-images/29/3.webp',
         'https://cdn.dummyjson.com/product-images/29/4.webp',
-        'https://cdn.dummyjson.com/product-images/29/// thumbnail.webp',
       ],
     },
     {
@@ -279,7 +255,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/30/1.jpg',
         'https://cdn.dummyjson.com/product-images/30/2.jpg',
         'https://cdn.dummyjson.com/product-images/30/3.jpg',
-        'https://cdn.dummyjson.com/product-images/30/// thumbnail.jpg',
       ],
     },
     {
@@ -289,7 +264,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/31/2.jpg',
         'https://cdn.dummyjson.com/product-images/31/3.jpg',
         'https://cdn.dummyjson.com/product-images/31/4.jpg',
-        'https://cdn.dummyjson.com/product-images/31/// thumbnail.jpg',
       ],
     },
     {
@@ -298,7 +272,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/32/1.jpg',
         'https://cdn.dummyjson.com/product-images/32/2.jpg',
         'https://cdn.dummyjson.com/product-images/32/3.jpg',
-        'https://cdn.dummyjson.com/product-images/32/// thumbnail.jpg',
       ],
     },
     {
@@ -308,7 +281,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/33/2.jpg',
         'https://cdn.dummyjson.com/product-images/33/3.jpg',
         'https://cdn.dummyjson.com/product-images/33/4.jpg',
-        'https://cdn.dummyjson.com/product-images/33/// thumbnail.jpg',
       ],
     },
     {
@@ -318,7 +290,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/34/2.jpg',
         'https://cdn.dummyjson.com/product-images/34/3.jpg',
         'https://cdn.dummyjson.com/product-images/34/4.jpg',
-        'https://cdn.dummyjson.com/product-images/34/// thumbnail.jpg',
       ],
     },
     {
@@ -328,7 +299,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/35/2.jpg',
         'https://cdn.dummyjson.com/product-images/35/3.jpg',
         'https://cdn.dummyjson.com/product-images/35/4.jpg',
-        'https://cdn.dummyjson.com/product-images/35/// thumbnail.jpg',
       ],
     },
     {
@@ -338,7 +308,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/36/2.webp',
         'https://cdn.dummyjson.com/product-images/36/3.webp',
         'https://cdn.dummyjson.com/product-images/36/4.jpg',
-        'https://cdn.dummyjson.com/product-images/36/// thumbnail.jpg',
       ],
     },
     {
@@ -348,7 +317,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/37/2.jpg',
         'https://cdn.dummyjson.com/product-images/37/3.jpg',
         'https://cdn.dummyjson.com/product-images/37/4.jpg',
-        'https://cdn.dummyjson.com/product-images/37/// thumbnail.jpg',
       ],
     },
     {
@@ -367,7 +335,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/39/2.jpg',
         'https://cdn.dummyjson.com/product-images/39/3.jpg',
         'https://cdn.dummyjson.com/product-images/39/4.jpg',
-        'https://cdn.dummyjson.com/product-images/39/// thumbnail.jpg',
       ],
     },
     {
@@ -384,7 +351,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/41/2.webp',
         'https://cdn.dummyjson.com/product-images/41/3.jpg',
         'https://cdn.dummyjson.com/product-images/41/4.jpg',
-        'https://cdn.dummyjson.com/product-images/41/// thumbnail.webp',
       ],
     },
     {
@@ -394,7 +360,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/42/2.png',
         'https://cdn.dummyjson.com/product-images/42/3.png',
         'https://cdn.dummyjson.com/product-images/42/4.jpg',
-        'https://cdn.dummyjson.com/product-images/42/// thumbnail.jpg',
       ],
     },
     {
@@ -404,7 +369,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/43/2.jpg',
         'https://cdn.dummyjson.com/product-images/43/3.jpg',
         'https://cdn.dummyjson.com/product-images/43/4.jpg',
-        'https://cdn.dummyjson.com/product-images/43/// thumbnail.jpg',
       ],
     },
     {
@@ -414,7 +378,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/44/2.jpg',
         'https://cdn.dummyjson.com/product-images/44/3.jpg',
         'https://cdn.dummyjson.com/product-images/44/4.jpg',
-        'https://cdn.dummyjson.com/product-images/44/// thumbnail.jpg',
       ],
     },
     {
@@ -424,7 +387,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/45/2.webp',
         'https://cdn.dummyjson.com/product-images/45/3.jpg',
         'https://cdn.dummyjson.com/product-images/45/4.jpg',
-        'https://cdn.dummyjson.com/product-images/45/// thumbnail.jpg',
       ],
     },
     {
@@ -434,7 +396,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/46/2.jpg',
         'https://cdn.dummyjson.com/product-images/46/3.jpg',
         'https://cdn.dummyjson.com/product-images/46/4.jpg',
-        'https://cdn.dummyjson.com/product-images/46/// thumbnail.jpg',
       ],
     },
     {
@@ -443,7 +404,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/47/1.jpg',
         'https://cdn.dummyjson.com/product-images/47/2.jpg',
         'https://cdn.dummyjson.com/product-images/47/3.jpg',
-        'https://cdn.dummyjson.com/product-images/47/// thumbnail.jpeg',
       ],
     },
     {
@@ -453,7 +413,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/48/2.jpg',
         'https://cdn.dummyjson.com/product-images/48/3.jpg',
         'https://cdn.dummyjson.com/product-images/48/4.jpg',
-        'https://cdn.dummyjson.com/product-images/48/// thumbnail.jpg',
       ],
     },
     {
@@ -462,7 +421,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/49/1.jpg',
         'https://cdn.dummyjson.com/product-images/49/2.jpg',
         'https://cdn.dummyjson.com/product-images/49/3.webp',
-        'https://cdn.dummyjson.com/product-images/49/// thumbnail.jpg',
       ],
     },
     {
@@ -479,7 +437,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/51/1.png',
         'https://cdn.dummyjson.com/product-images/51/2.jpg',
         'https://cdn.dummyjson.com/product-images/51/3.jpg',
-        'https://cdn.dummyjson.com/product-images/51/// thumbnail.jpg',
       ],
     },
     {
@@ -489,7 +446,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/52/2.png',
         'https://cdn.dummyjson.com/product-images/52/3.jpg',
         'https://cdn.dummyjson.com/product-images/52/4.jpg',
-        'https://cdn.dummyjson.com/product-images/52/// thumbnail.jpg',
       ],
     },
     {
@@ -499,7 +455,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/53/2.jpg',
         'https://cdn.dummyjson.com/product-images/53/3.jpg',
         'https://cdn.dummyjson.com/product-images/53/4.jpg',
-        'https://cdn.dummyjson.com/product-images/53/// thumbnail.jpg',
       ],
     },
     {
@@ -509,7 +464,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/54/2.jpg',
         'https://cdn.dummyjson.com/product-images/54/3.jpg',
         'https://cdn.dummyjson.com/product-images/54/4.jpg',
-        'https://cdn.dummyjson.com/product-images/54/// thumbnail.jpg',
       ],
     },
     {
@@ -519,7 +473,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/55/2.webp',
         'https://cdn.dummyjson.com/product-images/55/3.jpg',
         'https://cdn.dummyjson.com/product-images/55/4.jpg',
-        'https://cdn.dummyjson.com/product-images/55/// thumbnail.jpg',
       ],
     },
     {
@@ -530,7 +483,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/56/3.jpg',
         'https://cdn.dummyjson.com/product-images/56/4.jpg',
         'https://cdn.dummyjson.com/product-images/56/5.jpg',
-        'https://cdn.dummyjson.com/product-images/56/// thumbnail.jpg',
       ],
     },
     {
@@ -540,7 +492,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/57/2.jpg',
         'https://cdn.dummyjson.com/product-images/57/3.jpg',
         'https://cdn.dummyjson.com/product-images/57/4.jpg',
-        'https://cdn.dummyjson.com/product-images/57/// thumbnail.jpg',
       ],
     },
     {
@@ -550,7 +501,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/58/2.jpg',
         'https://cdn.dummyjson.com/product-images/58/3.jpg',
         'https://cdn.dummyjson.com/product-images/58/4.jpg',
-        'https://cdn.dummyjson.com/product-images/58/// thumbnail.jpg',
       ],
     },
     {
@@ -560,7 +510,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/59/2.jpg',
         'https://cdn.dummyjson.com/product-images/59/3.jpg',
         'https://cdn.dummyjson.com/product-images/59/4.jpg',
-        'https://cdn.dummyjson.com/product-images/59/// thumbnail.jpg',
       ],
     },
     {
@@ -569,7 +518,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/60/1.jpg',
         'https://cdn.dummyjson.com/product-images/60/2.jpg',
         'https://cdn.dummyjson.com/product-images/60/3.jpg',
-        'https://cdn.dummyjson.com/product-images/60/// thumbnail.jpg',
       ],
     },
     {
@@ -602,7 +550,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/64/1.jpg',
         'https://cdn.dummyjson.com/product-images/64/2.webp',
         'https://cdn.dummyjson.com/product-images/64/3.jpg',
-        'https://cdn.dummyjson.com/product-images/64/// thumbnail.jpg',
       ],
     },
     {
@@ -612,7 +559,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/65/2.webp',
         'https://cdn.dummyjson.com/product-images/65/3.jpg',
         'https://cdn.dummyjson.com/product-images/65/4.webp',
-        'https://cdn.dummyjson.com/product-images/65/// thumbnail.webp',
       ],
     },
     {
@@ -621,7 +567,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/71/1.jpg',
         'https://cdn.dummyjson.com/product-images/71/2.jpg',
         'https://cdn.dummyjson.com/product-images/71/3.webp',
-        'https://cdn.dummyjson.com/product-images/71/// thumbnail.jpg',
       ],
     },
     {
@@ -631,7 +576,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/72/2.png',
         'https://cdn.dummyjson.com/product-images/72/3.webp',
         'https://cdn.dummyjson.com/product-images/72/4.jpg',
-        'https://cdn.dummyjson.com/product-images/72/// thumbnail.webp',
       ],
     },
     {
@@ -640,7 +584,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/73/1.jpg',
         'https://cdn.dummyjson.com/product-images/73/2.webp',
         'https://cdn.dummyjson.com/product-images/73/3.jpg',
-        'https://cdn.dummyjson.com/product-images/73/// thumbnail.jpg',
       ],
     },
     {
@@ -650,7 +593,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/74/2.jpg',
         'https://cdn.dummyjson.com/product-images/74/3.jpg',
         'https://cdn.dummyjson.com/product-images/74/4.jpg',
-        'https://cdn.dummyjson.com/product-images/74/// thumbnail.jpg',
       ],
     },
     {
@@ -659,7 +601,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/75/1.jpg',
         'https://cdn.dummyjson.com/product-images/75/2.jpg',
         'https://cdn.dummyjson.com/product-images/75/3.jpg',
-        'https://cdn.dummyjson.com/product-images/75/// thumbnail.jpg',
       ],
     },
     {
@@ -667,7 +608,6 @@ export async function seed(knex: Knex): Promise<void> {
       image_data: [
         'https://cdn.dummyjson.com/product-images/76/1.jpg',
         'https://cdn.dummyjson.com/product-images/76/2.jpg',
-        'https://cdn.dummyjson.com/product-images/76/// thumbnail.jpg',
       ],
     },
     {
@@ -676,7 +616,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/77/1.jpg',
         'https://cdn.dummyjson.com/product-images/77/2.jpg',
         'https://cdn.dummyjson.com/product-images/77/3.jpg',
-        'https://cdn.dummyjson.com/product-images/77/// thumbnail.jpg',
       ],
     },
     {
@@ -696,7 +635,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/80/2.jpg',
         'https://cdn.dummyjson.com/product-images/80/3.png',
         'https://cdn.dummyjson.com/product-images/80/4.jpg',
-        'https://cdn.dummyjson.com/product-images/80/// thumbnail.jpg',
       ],
     },
     {
@@ -706,7 +644,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/81/2.jpg',
         'https://cdn.dummyjson.com/product-images/81/3.jpg',
         'https://cdn.dummyjson.com/product-images/81/4.webp',
-        'https://cdn.dummyjson.com/product-images/81/// thumbnail.jpg',
       ],
     },
     {
@@ -716,7 +653,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/82/2.webp',
         'https://cdn.dummyjson.com/product-images/82/3.jpg',
         'https://cdn.dummyjson.com/product-images/82/4.jpg',
-        'https://cdn.dummyjson.com/product-images/82/// thumbnail.jpg',
       ],
     },
     {
@@ -726,7 +662,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/83/2.jpg',
         'https://cdn.dummyjson.com/product-images/83/3.jpg',
         'https://cdn.dummyjson.com/product-images/83/4.jpg',
-        'https://cdn.dummyjson.com/product-images/83/// thumbnail.jpg',
       ],
     },
     {
@@ -734,7 +669,6 @@ export async function seed(knex: Knex): Promise<void> {
       image_data: [
         'https://cdn.dummyjson.com/product-images/84/1.jpg',
         'https://cdn.dummyjson.com/product-images/84/2.jpg',
-        'https://cdn.dummyjson.com/product-images/84/// thumbnail.jpg',
       ],
     },
     {
@@ -742,7 +676,6 @@ export async function seed(knex: Knex): Promise<void> {
       image_data: [
         'https://cdn.dummyjson.com/product-images/85/1.jpg',
         'https://cdn.dummyjson.com/product-images/85/2.jpg',
-        'https://cdn.dummyjson.com/product-images/85/// thumbnail.jpg',
       ],
     },
     {
@@ -752,7 +685,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/86/2.webp',
         'https://cdn.dummyjson.com/product-images/86/3.jpg',
         'https://cdn.dummyjson.com/product-images/86/4.jpg',
-        'https://cdn.dummyjson.com/product-images/86/// thumbnail.jpg',
       ],
     },
     {
@@ -762,7 +694,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/87/2.jpg',
         'https://cdn.dummyjson.com/product-images/87/3.jpg',
         'https://cdn.dummyjson.com/product-images/87/4.jpg',
-        'https://cdn.dummyjson.com/product-images/87/// thumbnail.jpg',
       ],
     },
     {
@@ -772,7 +703,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/88/2.jpg',
         'https://cdn.dummyjson.com/product-images/88/3.jpg',
         'https://cdn.dummyjson.com/product-images/88/4.webp',
-        'https://cdn.dummyjson.com/product-images/88/// thumbnail.jpg',
       ],
     },
     {
@@ -782,7 +712,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/89/2.jpg',
         'https://cdn.dummyjson.com/product-images/89/3.jpg',
         'https://cdn.dummyjson.com/product-images/89/4.jpg',
-        'https://cdn.dummyjson.com/product-images/89/// thumbnail.jpg',
       ],
     },
     {
@@ -792,7 +721,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/90/2.jpg',
         'https://cdn.dummyjson.com/product-images/90/3.jpg',
         'https://cdn.dummyjson.com/product-images/90/4.jpg',
-        'https://cdn.dummyjson.com/product-images/90/// thumbnail.jpg',
       ],
     },
     {
@@ -802,7 +730,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/91/2.jpg',
         'https://cdn.dummyjson.com/product-images/91/3.jpg',
         'https://cdn.dummyjson.com/product-images/91/4.jpg',
-        'https://cdn.dummyjson.com/product-images/91/// thumbnail.jpg',
       ],
     },
     {
@@ -821,7 +748,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/93/2.jpg',
         'https://cdn.dummyjson.com/product-images/93/3.jpg',
         'https://cdn.dummyjson.com/product-images/93/4.jpg',
-        'https://cdn.dummyjson.com/product-images/93/// thumbnail.jpg',
       ],
     },
     {
@@ -830,7 +756,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/94/1.webp',
         'https://cdn.dummyjson.com/product-images/94/2.jpg',
         'https://cdn.dummyjson.com/product-images/94/3.jpg',
-        'https://cdn.dummyjson.com/product-images/94/// thumbnail.webp',
       ],
     },
     {
@@ -840,7 +765,7 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/95/2.jpg',
         'https://cdn.dummyjson.com/product-images/95/3.jpg',
         'https://cdn.dummyjson.com/product-images/95/4.jpg',
-        'https://cdn.dummyjson.com/product-images/95/// thumbnail.jpg',
+
       ],
     },
     {
@@ -850,7 +775,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/96/2.jpg',
         'https://cdn.dummyjson.com/product-images/96/3.jpg',
         'https://cdn.dummyjson.com/product-images/96/4.jpg',
-        'https://cdn.dummyjson.com/product-images/96/// thumbnail.jpg',
       ],
     },
     {
@@ -860,7 +784,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/97/2.jpg',
         'https://cdn.dummyjson.com/product-images/97/3.jpg',
         'https://cdn.dummyjson.com/product-images/97/4.webp',
-        'https://cdn.dummyjson.com/product-images/97/// thumbnail.jpg',
       ],
     },
     {
@@ -870,7 +793,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/98/2.jpg',
         'https://cdn.dummyjson.com/product-images/98/3.jpg',
         'https://cdn.dummyjson.com/product-images/98/4.jpg',
-        'https://cdn.dummyjson.com/product-images/98/// thumbnail.jpg',
       ],
     },
     {
@@ -880,7 +802,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/99/2.jpg',
         'https://cdn.dummyjson.com/product-images/99/3.jpg',
         'https://cdn.dummyjson.com/product-images/99/4.jpg',
-        'https://cdn.dummyjson.com/product-images/99/// thumbnail.jpg',
       ],
     },
     {
@@ -889,7 +810,6 @@ export async function seed(knex: Knex): Promise<void> {
         'https://cdn.dummyjson.com/product-images/100/1.jpg',
         'https://cdn.dummyjson.com/product-images/100/2.jpg',
         'https://cdn.dummyjson.com/product-images/100/3.jpg',
-        'https://cdn.dummyjson.com/product-images/100/// thumbnail.jpg',
       ],
     },
   ];

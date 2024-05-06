@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import fs from 'fs';
 import { GdriveRequest } from '../types/type';
 import { google } from 'googleapis';
-import { handleResponses, pkey } from '../utils/utils';
+import { handleResponse, pkey } from '../utils/utils';
 
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
@@ -68,10 +68,12 @@ export const GdriveService =  async (req:GdriveRequest, res:Response, next:NextF
   }catch(error:any)
   {
     console.log(error);
-    return handleResponses(
+    return handleResponse(
       res,
       'Failed to uplaod files in google',
-      'Internal_Server_Error'
+      'Internal_Server_Error',
+      false,
+      'Internal_Server_Error',
     );
   }
 };

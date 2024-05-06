@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import bcrypt from 'bcrypt';
-import { handleResponses, loginHelper } from '../utils/utils';
+import { handleResponse, loginHelper } from '../utils/utils';
 import User from '../model/user_model';
 import Seller from '../model/seller_model';
 import { GdriveRequest } from '../types/type';
@@ -77,18 +77,10 @@ export const registerSeller = async (req: GdriveRequest, res: Response) => {
   } catch (error: any) {
     if (error.code === 'ER_DUP_ENTRY') {
       console.error('Duplicate entry error:', error);
-      return handleResponses(
-        res,
-        'Registration failed: GST number already exists.',
-        'Bad_Request'
-      );
+      return handleResponse(res, 'Registration failed: GST number already exists.', 'Bad_Request', false, 'Bad_Request');
     } else {
       console.error('Failed to register seller and upload files:', error);
-      return handleResponses(
-        res,
-        'Failed to register seller and upload files. Please try again later.',
-        'Internal_Server_Error'
-      );
+      return handleResponse(res, 'Failed to register seller and upload files. Please try again later.', 'Internal_Server_Error', false, 'Internal_Server_Error');
     }
   }
 };

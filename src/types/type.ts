@@ -40,7 +40,7 @@ export interface CustomRequest extends Request {
   }[];
 }
 export interface AuthRequest extends Request {
-  user_id: string;
+  user_id?: string;
 }
 export interface GdriveRequest extends Request {
   uploadedFiles?:any[]

@@ -1,12 +1,11 @@
-import {bookshelfInstance} from '../config/dbconfig';
-
+import { bookshelfInstance } from '../config/dbconfig';
+import Cart from './cart_model';
 
 class User extends bookshelfInstance.Model<User> {
   type!: number;
   first_name!: string;
-  last_name!:string;
-  password!:string;
-
+  last_name!: string;
+  password!: string;
 
   get tableName() {
     return 'users';
@@ -21,6 +20,9 @@ class User extends bookshelfInstance.Model<User> {
     }
   }
 
+  cartItems() {
+    return this.hasMany(Cart, 'product_id');
+  }
 }
 
 export default User;

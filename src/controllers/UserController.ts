@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { handleResponses, loginHelper } from '../utils/utils';
+import { handleResponse, loginHelper } from '../utils/utils';
 import bcrypt from 'bcrypt';
 import User from '../model/user_model';
 import { RegisterPayload, LoginPayload } from '../types/type';
@@ -12,7 +12,7 @@ export const registerUser = async (req: Request, res: Response) => {
     const user = await User.findByEmail(req.body?.email);
 
     if (user) {
-      return handleResponses(res, 'User Already exists', 'Conflict');
+      return handleResponse(res,'User already exists','Conflict', false, 'Conflict');
     }
     const hashedpassword = bcrypt.hashSync(password, 10);
     const type = 1;
@@ -28,9 +28,12 @@ export const registerUser = async (req: Request, res: Response) => {
     await newUser.save();
     return loginHelper(res, newUser, 0);
   } catch (error: any) {
-    return handleResponses(
+    console.log('Failed to register user');
+    return handleResponse(
       res,
       'Failed to register user',
+      'Internal_Server_Error',
+      false,
       'Internal_Server_Error'
     );
   }
@@ -42,7 +45,13 @@ export const loginUser = async (req: Request, res: Response) => {
     const user = await User.findByEmail(email);
 
     if (!user) {
-      return handleResponses(res, 'User Not Found', 'Not_Found');
+      return handleResponse(
+        res,
+        'User not Found',
+        'Not_Found',
+        false,
+        'Not_Found'
+      );
     }
 
     const isPasswordValid = await bcrypt.compare(
@@ -51,14 +60,23 @@ export const loginUser = async (req: Request, res: Response) => {
     );
 
     if (!isPasswordValid) {
-      return handleResponses(res, 'Invalid password', 'Unauthorized');
+      return handleResponse(
+        res,
+        'Invalid password',
+        'Unauthorized',
+        false,
+        'Unauthorized'
+      );
     }
 
     return loginHelper(res, user);
   } catch (error: any) {
-    return handleResponses(
+    console.error('Failed to login user:', error);
+    return handleResponse(
       res,
       'Failed to login user',
+      'Internal_Server_Error',
+      false,
       'Internal_Server_Error'
     );
   }

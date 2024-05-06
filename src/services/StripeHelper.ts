@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import { CartItem, CustomRequest } from '../types/type';
-import { COUPENCODE, handleResponses } from '../utils/utils';
+import { COUPENCODE, handleResponse } from '../utils/utils';
 
 export const StripHelper = (
   req: CustomRequest,
@@ -42,7 +42,6 @@ export const StripHelper = (
     req.lineitems = lineItems;
     next();
   } catch (error: any) {
-    console.log('instripe helper');
-    return handleResponses(res, error.message, 'Internal_Server_Error');
+    return handleResponse(res, error.message, 'Internal_Server_Error', false, 'Internal_Server_Error');
   }
 };
