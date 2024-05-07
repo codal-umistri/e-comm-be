@@ -19,5 +19,11 @@ export async function up(knex:Knex):Promise<void>
 }
 
 export async function down(knex: Knex): Promise<void> {
+  // // Drop the foreign key constraint 
+  // await knex.schema.alterTable('products', (table) => {
+  //   table.dropForeign(['category_id']);
+  // });
+
+  // Then drop the products tablefirst
   await knex.schema.dropTableIfExists('products');
 }

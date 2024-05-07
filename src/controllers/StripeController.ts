@@ -19,17 +19,9 @@ export const stripeSession = async (req: CustomRequest, res: Response) => {
       success_url: process.env.SUCCESS_URL,
       cancel_url: process.env.CANCEL_URL,
     });
-    // res.json({
-    //   success: true,
-    //   message: 'Stripe session created successfully',
-    //   id: session.id,
-    // });
     return handleResponse(res,'Stripe session created successfully', 'Success', true);
   } catch (error: any) {
     console.error('Error creating stripe session:', error);
-    // return res
-    //   .status(500)
-    //   .json({ success: false, message: 'Failed to create stripe session' });
     return handleResponse(res,'Failed to create stripe session', 'Internal_Server_Error', false, 'Internal_Server_Error');
   }
 };

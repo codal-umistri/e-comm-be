@@ -814,14 +814,13 @@ export async function seed(knex: Knex): Promise<void> {
     },
   ];
 
-  products.forEach((product) => {
+  for (const product of products) {
     const productId = product.product_id;
-
-    product.image_data.forEach(async (imagurl) => {
+    for (const imageUrl of product.image_data) {
       await knex('image').insert({
         product_id: productId,
-        image_data: imagurl,
+        image_data: imageUrl,
       });
-    });
-  });
+    }
+  }
 }

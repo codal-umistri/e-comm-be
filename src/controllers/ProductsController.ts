@@ -49,7 +49,6 @@ export const product = async (req: Request, res: Response) => {
       })
     );
 
-    // res.json({ success: true, data: products });
     return handleResponse(
       res,
       'Fetched Successfully',
@@ -61,7 +60,6 @@ export const product = async (req: Request, res: Response) => {
     );
   } catch (error) {
     console.error('Error fetching products:', error);
-    // res.status(500).json({ success: false, message: 'Failed to fetch products' });
     return handleResponse(
       res,
       'Failed to fetch products',
@@ -81,7 +79,6 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
       .first();
 
     if (!product) {
-      // return res.status(404).json({ success: false, message: 'Product not found' });
       return handleResponse(
         res,
         'Product not found',
@@ -115,7 +112,6 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
       images: images.map((image) => image.image_data),
     };
 
-    // return res.status(200).json({ success: true, message: 'Item added to cart', item });
     return handleResponse(
       res,
       'Item added to cart',
@@ -126,7 +122,6 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
     );
   } catch (error: any) {
     console.error('Error adding item to cart:', error);
-    // return res.status(500).json({ success: false, message: 'Failed to add item to cart' });
     return handleResponse(
       res,
       'Failed to add item to cart',
@@ -142,7 +137,6 @@ export const removeFromCart = async (req: AuthRequest, res: Response) => {
     const cartitem = await Cart.findbyid(req.body.id, req.user_id as string);
 
     if (!cartitem) {
-      // return res.status(404).json({ success: false, message: 'There is no such item in the cart' });
       return handleResponse(
         res,
         'There is no such item in the cart',
@@ -154,7 +148,6 @@ export const removeFromCart = async (req: AuthRequest, res: Response) => {
 
     const deletedItem = { ...cartitem.toJSON() };
     await cartitem.destroy();
-    // res.status(200).json({ success: true, message: 'Item deleted', item: deletedItem });
     return handleResponse(
       res,
       'Item deleted',
@@ -165,7 +158,6 @@ export const removeFromCart = async (req: AuthRequest, res: Response) => {
     );
   } catch (error: any) {
     console.error('Error deleting cart item:', error);
-    // return res.status(500).json({ success: false, message: 'Failed to delete cart item' });
     return handleResponse(
       res,
       'Failed to delete cart item',
@@ -192,7 +184,6 @@ export const getCartProducts = async (req: AuthRequest, res: Response) => {
         false,
         'Not_Found'
       );
-      // return res.status(404).json({ success: false, message: 'Cart is empty' });
     }
 
     const cartProducts = await Promise.all(
@@ -202,7 +193,6 @@ export const getCartProducts = async (req: AuthRequest, res: Response) => {
           .leftJoin('category', 'products.category_id', '=', 'category.id')
           .where('products.id', '=', item.product_id)
           .first();
-        // console.log(product);
         if (!product) {
           return null;
         }
@@ -232,7 +222,6 @@ export const getCartProducts = async (req: AuthRequest, res: Response) => {
       (product: any) => product !== null
     );
 
-    // res.status(200).json({ success: true, message: 'Cart items fetched', items: validCartProducts });
     return handleResponse(
       res,
       'Cart items fetched',
@@ -243,7 +232,6 @@ export const getCartProducts = async (req: AuthRequest, res: Response) => {
     );
   } catch (error: any) {
     console.error('Error fetching cart items:', error);
-    // return res.status(500).json({ success: false, message: 'Failed to fetch cart items' });
     return handleResponse(
       res,
       'Failed to fetch cart items',
@@ -260,7 +248,6 @@ export const destroyCart = async (req: AuthRequest, res: Response) => {
     const id = await knexInstance('cart')
       .where('user_id', req.user_id)
       .delete();
-    // res.status(200).json({ success: true, message: 'Cart items deleted successfully' });
     return handleResponse(
       res,
       'Cart items deleted successfully',
@@ -269,7 +256,6 @@ export const destroyCart = async (req: AuthRequest, res: Response) => {
     );
   } catch (error: any) {
     console.error('Error deleting cart items:', error);
-    // return res.status(500).json({ success: false, message: 'Failed to delete cart items' });
     return handleResponse(
       res,
       'Failed to delete cart items',
@@ -285,9 +271,6 @@ export const addquantity = async (req: AuthRequest, res: Response) => {
     const cartitem = await Cart.findbyid(req.body.id, req.user_id as string);
     if (!cartitem) {
       console.log('Cart item not found');
-      // return res
-      //   .status(404)
-      //   .json({ success: false, message: 'Cart item not found' });
       return handleResponse(res,'Cart item not found',   'Not_Found',
         false,
         'Not_Found' );
@@ -296,12 +279,6 @@ export const addquantity = async (req: AuthRequest, res: Response) => {
       { quantity: (await cartitem.get('quantity')) + 1 },
       { patch: true }
     );
-
-    // return res.status(200).json({
-    //   success: true,
-    //   message: 'Cart item updated successfully',
-    //   item: cartitem.toJSON()
-    // });
     return handleResponse(
       res,
       'Cart item updated successfully',
@@ -312,7 +289,6 @@ export const addquantity = async (req: AuthRequest, res: Response) => {
     );
   } catch (error: any) {
     console.error('Error updating cart item:', error);
-    // return res.status(500).json({ success: false, message: 'Internal Server Error' });
     return handleResponse(
       res,
       'Failed to increse quantity of item',
@@ -328,7 +304,6 @@ export const minusquantity = async (req: AuthRequest, res: Response) => {
     const cartitem = await Cart.findbyid(req.body.id, req.user_id as string);
 
     if (!cartitem) {
-      // return res.status(404).json({ success: false, message: 'Cart item not found' });
       return handleResponse(
         res,
         'Cart item not found',
@@ -339,7 +314,6 @@ export const minusquantity = async (req: AuthRequest, res: Response) => {
     }
     const quantity = await cartitem.get('quantity');
     if (quantity === 1) {
-      //  return res.status(400).json({ success: false, message: 'Cart item cannot be updated' });
       return handleResponse(
         res,
         'Cart item cannot be updated',
@@ -349,11 +323,7 @@ export const minusquantity = async (req: AuthRequest, res: Response) => {
       );
     }
     await cartitem.save({ quantity: quantity - 1 }, { patch: true });
-    // return res.status(200).json({
-    //   success: true,
-    //   message: 'Cart item updated successfully',
-    //   item: cartitem.toJSON()
-    // });
+
     return handleResponse(
       res,
       'Cart item updated successfully',
@@ -364,7 +334,6 @@ export const minusquantity = async (req: AuthRequest, res: Response) => {
     );
   } catch (error: any) {
     console.error('Error updating cart item:', error);
-    // return res.status(500).json({ success: false, message: 'Internal Server Error' });
     return handleResponse(
       res,
       'Failed to decrease quantity of item',
@@ -381,7 +350,6 @@ export const findProduct = async (req: Request, res: Response) => {
     const product = await Products.findbyid(id as string);
     if (!product) {
       console.log('Product item not found');
-      // return res.status(404).json({ success: false, message: 'Product item not found' });
       return handleResponse(
         res,
         'Product item not found',
@@ -407,13 +375,6 @@ export const findProduct = async (req: Request, res: Response) => {
       images: images.map((image) => image.image_data),
     };
 
-    // const responseData = {
-    //   success: true,
-    //   message: 'Item fetched successfully',
-    //   item: productWithImages,
-    // };
-
-    // return res.status(200).json(responseData);
     return handleResponse(
       res,
       'Item fetched successfully',
@@ -424,7 +385,6 @@ export const findProduct = async (req: Request, res: Response) => {
     );
   } catch (error: any) {
     console.error('Error fetching product:', error);
-    // return res.status(500).json({ success: false, message: 'Internal Server Error' });
     return handleResponse(
       res,
       'Failed to find product',
