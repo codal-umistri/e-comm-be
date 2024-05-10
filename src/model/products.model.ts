@@ -2,6 +2,7 @@ import { bookshelfInstance } from '../config/dbconfig';
 import Cart from './cart_model';
 import Category from './category_model';
 import Image from './image_model';
+import Order from './order_model';
 
 class Products extends bookshelfInstance.Model<Products> {
   get tableName() {
@@ -18,6 +19,10 @@ class Products extends bookshelfInstance.Model<Products> {
 
   cartItems() {
     return this.hasMany(Cart, 'product_id');
+  }
+
+  orderItems() {
+    return this.hasMany(Order, 'product_id');
   }
 
   static async findbyid(id: string): Promise<Products | null> {

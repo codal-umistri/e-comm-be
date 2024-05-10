@@ -83,7 +83,7 @@ export const loginHelper = (
 ) => {
   const secretKey = process.env.SECRET_KEY;
   const token = jwt.sign({ id: user.get('id') }, secretKey as string, {
-    expiresIn: '3h',
+    expiresIn: '2d',
   });
 
   if (IsLogin === 1) {

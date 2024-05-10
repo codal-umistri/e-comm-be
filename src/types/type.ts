@@ -23,10 +23,23 @@ export interface Product {
   images: string[];
 }
 export interface CartItem {
-  item: Product;
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
   quantity: number;
 }
-export interface CustomRequest extends Request {
+export interface AuthRequest extends Request {
+  user_id?: string;
+}
+export interface CustomRequest extends AuthRequest {
   lineitems?: {
     price_data: {
       currency: string;
@@ -38,10 +51,9 @@ export interface CustomRequest extends Request {
     };
     quantity: number;
   }[];
+  order_id?:string,
 }
-export interface AuthRequest extends Request {
-  user_id?: string;
-}
+
 export interface GdriveRequest extends Request {
   uploadedFiles?:any[]
 }

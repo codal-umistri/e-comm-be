@@ -1,7 +1,7 @@
 import { handleResponse } from '../utils/utils';
 import { Response, NextFunction } from 'express';
 import { AuthRequest } from '../types/type';
-import jwt from 'jsonwebtoken';
+import jwt, { TokenExpiredError } from 'jsonwebtoken'; // Import TokenExpiredError from jsonwebtoken
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -16,8 +16,14 @@ export const Auth = (req: AuthRequest, res: Response, next: NextFunction) => {
 
     const decodedToken = jwt.verify(token, secretKey as string) as { id: string };
     req.user_id = decodedToken.id;
+    
     next();
   } catch (error: any) {
-    return handleResponse(res, 'Invalid Token', 'Unauthorized', false,'Unauthorized');
+
+    if (error instanceof TokenExpiredError) {
+      return handleResponse(res, 'Token expired', 'Unauthorized', false, 'Expired');
+    } else {
+      return handleResponse(res, 'Invalid Token', 'Unauthorized', false, 'Unauthorized');
+    }
   }
 };

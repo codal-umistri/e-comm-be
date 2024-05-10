@@ -270,7 +270,6 @@ export const addquantity = async (req: AuthRequest, res: Response) => {
   try {
     const cartitem = await Cart.findbyid(req.body.id, req.user_id as string);
     if (!cartitem) {
-      console.log('Cart item not found');
       return handleResponse(res,'Cart item not found',   'Not_Found',
         false,
         'Not_Found' );
@@ -349,7 +348,6 @@ export const findProduct = async (req: Request, res: Response) => {
     const { id } = req.query;
     const product = await Products.findbyid(id as string);
     if (!product) {
-      console.log('Product item not found');
       return handleResponse(
         res,
         'Product item not found',

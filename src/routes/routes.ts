@@ -5,13 +5,14 @@ import { validateRegisterInputs, validateLoginInputs, validateSellerInputs } fro
 import { registerSeller } from '../controllers/SellerController';
 import { upload } from '../services/Multer';
 import { GdriveService } from '../services/GdriveService';
-import { StripHelper } from '../services/StripeHelper';
 import { addToCart, addquantity, destroyCart, findProduct, getCartProducts, minusquantity, product, removeFromCart} from '../controllers/ProductsController';
 import { Auth } from '../services/AuthService';
+import { StripHelper } from '../services/StripeHelper';
 
 const router = express.Router();
 
-router.post('/create-checkout-session', StripHelper , stripeSession);
+router.post('/create-checkout-session',Auth, StripHelper, stripeSession);
+// router.post('/create-checkout-session', Auth, StripHelper,stripeSession);
 router.post('/register', validateRegisterInputs, registerUser);
 router.post('/login', validateLoginInputs, loginUser);
 router.post('/seller', upload.any(), validateSellerInputs, GdriveService, registerSeller);
