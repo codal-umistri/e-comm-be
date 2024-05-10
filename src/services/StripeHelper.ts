@@ -45,6 +45,12 @@ export const StripHelper = async (
     next();
   } catch (error: any) {
     console.log(error);
-    res.status(500).send('Error occurred while creating session');
+    return handleResponse(
+      res,
+      'Error occurred while creating session',
+      'Internal_Server_Error',
+      false,
+      'Internal_Servr_Error'
+    );
   }
 };

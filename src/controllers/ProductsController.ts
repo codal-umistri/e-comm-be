@@ -245,7 +245,7 @@ export const getCartProducts = async (req: AuthRequest, res: Response) => {
 //for cleaering car of specific user
 export const destroyCart = async (req: AuthRequest, res: Response) => {
   try {
-    const id = await knexInstance('cart')
+    const cart = await knexInstance('cart')
       .where('user_id', req.user_id)
       .delete();
     return handleResponse(
