@@ -1,5 +1,5 @@
 import { NextFunction, Response } from 'express';
-import { CartItem, CustomRequest } from '../types/type';
+import { CustomRequest } from '../types/type';
 import { COUPENCODE, handleResponse } from '../utils/utils';
 import Order from '../model/order_model';
 import OrderItem from '../model/order-items_model';

@@ -2,24 +2,30 @@ import { Response, NextFunction } from 'express';
 import fs from 'fs';
 import { GdriveRequest } from '../types/type';
 import { google } from 'googleapis';
-import { handleResponse, pkey } from '../utils/utils';
-
+import { handleResponse } from '../utils/utils';
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
+// Access the private key from environment variables
+const privateKey = process.env.PRIVATE_KEY;
+
 async function authorize() {
   const jwtClient = new google.auth.JWT(
-    pkey.client_email,
-      null as unknown as string,
-      pkey.private_key,
-      SCOPES
+    process.env.CLIENT_EMAIL,
+    null as unknown as string,
+    privateKey?.replace(/\\n/g, '\n'),
+    SCOPES
   );
   await jwtClient.authorize();
   return jwtClient;
 }
 
-export const GdriveService =  async (req:GdriveRequest, res:Response, next:NextFunction) => {
-  try{
+export const GdriveService = async (
+  req: GdriveRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
     const files = req.files as Express.Multer.File[];
     if (!files || files.length === 0) {
       return res.status(400).send('No files uploaded');
@@ -27,7 +33,6 @@ export const GdriveService =  async (req:GdriveRequest, res:Response, next:NextF
 
     const authClient = await authorize();
     const drive = google.drive({ version: 'v3', auth: authClient });
-
 
     const uploadPromises = files.map(async (file: Express.Multer.File) => {
       const filePath = file.path;
@@ -39,18 +44,18 @@ export const GdriveService =  async (req:GdriveRequest, res:Response, next:NextF
 
       const fileMetadata = {
         name: fileName,
-        parents: ['13eP2Shlc6H9bsgDOUOtnEV7WuA0xvJl3'], 
+        parents: ['13eP2Shlc6H9bsgDOUOtnEV7WuA0xvJl3'],
       };
 
       const media = {
         mimeType: file.mimetype,
-        body: fs.createReadStream(filePath), 
+        body: fs.createReadStream(filePath),
       };
 
       const uploadedFile = await drive.files.create({
         requestBody: fileMetadata,
         media: media,
-        fields: 'id, name, mimeType, webViewLink', 
+        fields: 'id, name, mimeType, webViewLink',
       });
 
       return {
@@ -65,16 +70,14 @@ export const GdriveService =  async (req:GdriveRequest, res:Response, next:NextF
 
     req.uploadedFiles = uploadedFiles;
     next();
-  }catch(error:any)
-  {
+  } catch (error: any) {
     console.log(error);
     return handleResponse(
       res,
       'Failed to uplaod files in google',
       'Internal_Server_Error',
       false,
-      'Internal_Server_Error',
+      'Internal_Server_Error'
     );
   }
 };
-

@@ -12,7 +12,6 @@ import { StripHelper } from '../services/StripeHelper';
 const router = express.Router();
 
 router.post('/create-checkout-session',Auth, StripHelper, stripeSession);
-// router.post('/create-checkout-session', Auth, StripHelper,stripeSession);
 router.post('/register', validateRegisterInputs, registerUser);
 router.post('/login', validateLoginInputs, loginUser);
 router.post('/seller', upload.any(), validateSellerInputs, GdriveService, registerSeller);

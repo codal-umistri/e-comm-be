@@ -362,7 +362,7 @@ export const findProduct = async (req: Request, res: Response) => {
 
     const productWithImages = {
       id: await product.get('id'),
-      title: await product.get('ttile'),
+      title: await product.get('title'),
       description: await product.get('description'),
       price: await product.get('price'),
       discountPercentage: await product.get('discountPercentage'),
