@@ -6,14 +6,12 @@ import { handleResponse } from '../utils/utils';
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
-// Access the private key from environment variables
-const privateKey = process.env.PRIVATE_KEY;
 
 async function authorize() {
   const jwtClient = new google.auth.JWT(
     process.env.CLIENT_EMAIL,
     null as unknown as string,
-    privateKey?.replace(/\\n/g, '\n'),
+    process.env.PRIVATE_KEY,
     SCOPES
   );
   await jwtClient.authorize();
