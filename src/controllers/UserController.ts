@@ -185,7 +185,7 @@ export const sendPasswordResetOtp = async (req: Request, res: Response) => {
 export const CheckOtp = async (req: Request, res: Response) => {
   try {
     const { otp, hash } = req.body;
-    const OTP = await Otp.findByHash(hash);
+    const OTP = await Otp.findByHashAndCode(hash, otp);
 
     if (!OTP) {
       return handleResponse(
@@ -194,6 +194,17 @@ export const CheckOtp = async (req: Request, res: Response) => {
         'Not_Found',
         false,
         'Not_Found'
+      );
+    }
+
+
+    if (OTP.get('otp_code') !== otp) {
+      return handleResponse(
+        res,
+        'Invalid OTP',
+        'Unauthorized',
+        false,
+        'Unauthorized'
       );
     }
 
