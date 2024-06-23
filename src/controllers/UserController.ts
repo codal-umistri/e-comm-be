@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { handleResponse, loginHelper } from '../utils/utils';
+import { destroy, handleResponse, loginHelper } from '../utils/utils';
 import bcrypt from 'bcrypt';
 import User from '../model/user_model';
 import { RegisterPayload, LoginPayload } from '../types/type';
@@ -197,7 +197,6 @@ export const CheckOtp = async (req: Request, res: Response) => {
       );
     }
 
-
     if (OTP.get('otp_code') !== otp) {
       return handleResponse(
         res,
@@ -257,6 +256,9 @@ export const ForgotPassword = async (req: Request, res: Response) => {
 
     await user.save();
 
+    // Delete the OTP entry after password update is successful
+    await destroy(hash);
+
     return handleResponse(
       res,
       'Password updated successfully',
@@ -275,3 +277,5 @@ export const ForgotPassword = async (req: Request, res: Response) => {
     );
   }
 };
+
+

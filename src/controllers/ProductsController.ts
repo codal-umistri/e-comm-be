@@ -248,11 +248,20 @@ export const destroyCart = async (req: AuthRequest, res: Response) => {
     const cart = await knexInstance('cart')
       .where('user_id', req.user_id)
       .delete();
+    if (cart === 0) {
+      return handleResponse(
+        res,
+        'Cart is already empty',
+        'Not_Found',
+        false,
+        'Not_Found'
+      );
+    }
     return handleResponse(
       res,
       'Cart items deleted successfully',
       'Success',
-      true,
+      true
     );
   } catch (error: any) {
     console.error('Error deleting cart items:', error);
@@ -270,9 +279,13 @@ export const addquantity = async (req: AuthRequest, res: Response) => {
   try {
     const cartitem = await Cart.findbyid(req.body.id, req.user_id as string);
     if (!cartitem) {
-      return handleResponse(res,'Cart item not found',   'Not_Found',
+      return handleResponse(
+        res,
+        'Cart item not found',
+        'Not_Found',
         false,
-        'Not_Found' );
+        'Not_Found'
+      );
     }
     await cartitem.save(
       { quantity: (await cartitem.get('quantity')) + 1 },
@@ -282,7 +295,7 @@ export const addquantity = async (req: AuthRequest, res: Response) => {
       res,
       'Cart item updated successfully',
       'Success',
-      true, 
+      true,
       undefined,
       cartitem.toJSON()
     );

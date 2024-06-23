@@ -151,8 +151,6 @@ export const validateForgotPasswordInputs = (
   res: Response,
   next: NextFunction
 ) => {
-
-  console.log(req.body);
   if (
     req.body?.password === 'undefined' ||
     req.body?.confirm_password === 'undefined' ||

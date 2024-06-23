@@ -2,6 +2,7 @@ import User from '../model/user_model';
 import { Code, ResponseObj, StatusCodeMap } from '../types/type';
 import jwt from 'jsonwebtoken';
 import { Response } from 'express';
+import { knexInstance } from '../config/dbconfig';
 
 const StatusCode: StatusCodeMap = {
   Success: 200,
@@ -125,3 +126,16 @@ export function generateOtp() {
 
 //   next();
 // };
+
+export async function destroy(hash: string) {
+  try {
+    const result = await knexInstance('otp').where({ otp_hash: hash }).del();
+    if (result) {
+      console.log('OTP deleted successfully');
+    } else {
+      console.log('OTP not found');
+    }
+  } catch (error) {
+    console.error('Error during OTP deletion:', error);
+  }
+}
