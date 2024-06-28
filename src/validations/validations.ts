@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { handleValidationError } from '../utils/utils';
 import { GdriveRequest } from '../types/type';
 
-const validateEmail = (email: string) => {
+export const validateEmail = (email: string) => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   return email.match(emailRegex);
@@ -125,6 +125,53 @@ export const validateSellerInputs = (
       res,
       'Please provide a valid 10-digit mobile number.'
     );
+  } else if (!validateEmail(req.body.email)) {
+    return handleValidationError(res, 'Please provide a valid email address.');
+  }
+
+  next();
+};
+
+export const validateSendPasswordResetOtpInputs = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.body?.email === 'undefined' || !req.body?.email?.trim()) {
+    return handleValidationError(res, 'Please complete all required fields.');
+  } else if (!validateEmail(req.body?.email)) {
+    return handleValidationError(res, 'Please provide a valid email address.');
+  }
+
+  next();
+};
+
+export const validateForgotPasswordInputs = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (
+    req.body?.password === 'undefined' ||
+    req.body?.confirm_password === 'undefined' ||
+    !req.body?.password?.trim() ||
+    !req.body?.confirm_password?.trim()
+  ) {
+    return handleValidationError(res, 'Please complete all required fields.');
+  }
+
+  next();
+};
+
+export const validateOtpInputs = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (req.body?.otp === 'undefined' || req.body?.hash === 'undefined') {
+    return handleValidationError(res, 'Please complete all required fields.');
+  } else if (req.body?.otp.length !== 5) {
+    return handleValidationError(res, 'Otp must me 5 digits long');
   }
 
   next();

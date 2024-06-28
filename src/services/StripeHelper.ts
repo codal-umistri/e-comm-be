@@ -11,7 +11,6 @@ export const StripHelper = async (
 ) => {
   try {
     const { products, promoCode } = req.body;
-    console.log('in stripe helper');
     const order = new Order({
       user_id: req?.user_id,
       payment_status: 'pending',

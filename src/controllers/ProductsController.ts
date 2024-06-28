@@ -8,9 +8,21 @@ import Products from '../model/products.model';
 export const product = async (req: Request, res: Response) => {
   try {
     let query = knexInstance('products')
-      .select('products.*', 'category.category_name as category_name')
-      .leftJoin('category', 'products.category_id', '=', 'category.id');
-
+      .select(
+        'products.id',
+        'products.title',
+        'products.description',
+        'products.price',
+        'products.discountPercentage',
+        'products.rating',
+        'products.stock',
+        'products.brand',
+        'category.category_name as category',
+        knexInstance.raw('GROUP_CONCAT(image.image_data) as images')
+      )
+      .leftJoin('category', 'products.category_id', '=', 'category.id')
+      .innerJoin('image', 'products.id', '=', 'image.product_id')
+      .groupBy('products.id', 'category.category_name');
     const { keyword } = req.query;
     if (keyword) {
       query = query.where('title', 'like', `%${keyword}%`);
@@ -24,38 +36,19 @@ export const product = async (req: Request, res: Response) => {
     if (typeof minPrice === 'string' && typeof maxPrice === 'string') {
       query = query.whereBetween('price', [+minPrice, +maxPrice]);
     }
-
-    const productsWithImages = await query;
-
-    const products = await Promise.all(
-      productsWithImages.map(async (product) => {
-        const images = await knexInstance('image')
-          .where({ product_id: product.id })
-          .select('image_data');
-        const productWithImages = {
-          id: product.id,
-          title: product.title,
-          description: product.description,
-          price: product.price,
-          discountPercentage: product.discountPercentage,
-          rating: product.rating,
-          stock: product.stock,
-          brand: product.brand,
-          category: product.category_name,
-          thumbnail: `https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`,
-          images: images.map((image) => image.image_data),
-        };
-        return productWithImages;
-      })
-    );
-
+    const products = await query;
+    // Transform images from comma-separated string to array
+    const productsWithImages = products.map((product) => ({
+      ...product,
+      images: product.images ? product.images.split(',') : [],
+    }));
     return handleResponse(
       res,
-      'Fetched Successfully',
+      'Products fetched successfully',
       'Success',
       true,
       undefined,
-      products,
+      productsWithImages,
       'data'
     );
   } catch (error) {
@@ -72,13 +65,26 @@ export const product = async (req: Request, res: Response) => {
 
 export const addToCart = async (req: AuthRequest, res: Response) => {
   try {
-    const product = await knexInstance('products')
-      .select('products.*', 'category.category_name as category_name')
+    const productWithImages = await knexInstance('products')
+      .select(
+        'products.id',
+        'products.title',
+        'products.description',
+        'products.price',
+        'products.discountPercentage',
+        'products.rating',
+        'products.stock',
+        'products.brand',
+        'category.category_name as category',
+        knexInstance.raw('GROUP_CONCAT(image.image_data) as images')
+      )
       .leftJoin('category', 'products.category_id', '=', 'category.id')
+      .innerJoin('image', 'products.id', '=', 'image.product_id')
       .where('products.id', '=', req.body.id)
+      .groupBy('products.id', 'category.category_name')
       .first();
 
-    if (!product) {
+    if (!productWithImages) {
       return handleResponse(
         res,
         'Product not found',
@@ -88,10 +94,6 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
       );
     }
 
-    const images = await knexInstance('image')
-      .where({ product_id: product.id })
-      .select('image_data');
-
     const newCart = new Cart({
       user_id: req.user_id,
       product_id: req.body.id,
@@ -99,17 +101,19 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
     await newCart.save();
 
     const item = {
-      id: product.id,
-      title: product.title,
-      description: product.description,
-      price: product.price,
-      discountPercentage: product.discountPercentage,
-      rating: product.rating,
-      stock: product.stock,
-      brand: product.brand,
-      category: product.category_name,
-      thumbnail: `https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`,
-      images: images.map((image) => image.image_data),
+      id: productWithImages.id,
+      title: productWithImages.title,
+      description: productWithImages.description,
+      price: productWithImages.price,
+      discountPercentage: productWithImages.discountPercentage,
+      rating: productWithImages.rating,
+      stock: productWithImages.stock,
+      brand: productWithImages.brand,
+      category: productWithImages.category,
+      thumbnail: `https://cdn.dummyjson.com/product-images/${productWithImages.id}/thumbnail.jpg`,
+      images: productWithImages.images
+        ? productWithImages.images.split(',')
+        : [],
     };
 
     return handleResponse(
@@ -127,7 +131,7 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
       'Failed to add item to cart',
       'Internal_Server_Error',
       false,
-      'Internal_Servr_Error'
+      'Internal_Server_Error'
     );
   }
 };
@@ -170,13 +174,13 @@ export const removeFromCart = async (req: AuthRequest, res: Response) => {
 
 export const getCartProducts = async (req: AuthRequest, res: Response) => {
   try {
-    const cartitem = await knexInstance('cart').where(
+    const cartItems = await knexInstance('cart').where(
       'user_id',
       '=',
       req.user_id as string
-    );
+    );  
 
-    if (!cartitem) {
+    if (!cartItems.length) {
       return handleResponse(
         res,
         'Cart is empty',
@@ -186,41 +190,41 @@ export const getCartProducts = async (req: AuthRequest, res: Response) => {
       );
     }
 
-    const cartProducts = await Promise.all(
-      cartitem.map(async (item) => {
-        const product = await knexInstance('products')
-          .select('products.*', 'category.category_name as category_name')
-          .leftJoin('category', 'products.category_id', '=', 'category.id')
-          .where('products.id', '=', item.product_id)
-          .first();
-        if (!product) {
-          return null;
-        }
+    const cartProductIds = cartItems.map((item) => item.product_id);
 
-        const images = await knexInstance('image')
-          .where({ product_id: product.id })
-          .select('image_data');
+    const cartProducts = await knexInstance('products')
+      .select(
+        'products.id',
+        'products.title',
+        'products.description',
+        'products.price',
+        'products.discountPercentage',
+        'products.rating',
+        'products.stock',
+        'products.brand',
+        'category.category_name as category',
+        knexInstance.raw('GROUP_CONCAT(image.image_data) as images')
+      )
+      .leftJoin('category', 'products.category_id', '=', 'category.id')
+      .innerJoin('image', 'products.id', '=', 'image.product_id')
+      .whereIn('products.id', cartProductIds)
+      .groupBy('products.id', 'category.category_name');
 
-        return {
-          id: product.id,
-          title: product.title,
-          description: product.description,
-          price: product.price,
-          discountPercentage: product.discountPercentage,
-          rating: product.rating,
-          stock: product.stock,
-          brand: product.brand,
-          category: product.category_name,
-          thumbnail: `https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`,
-          images: images.map((image) => image.image_data),
-          quantity: item.quantity,
-        };
-      })
-    );
-
-    const validCartProducts = cartProducts.filter(
-      (product: any) => product !== null
-    );
+    const cartProductsWithImages = cartProducts.map((product) => ({
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      price: product.price,
+      discountPercentage: product.discountPercentage,
+      rating: product.rating,
+      stock: product.stock,
+      brand: product.brand,
+      category: product.category,
+      thumbnail: `https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`,
+      images: product.images ? product.images.split(',') : [],
+      quantity:
+        cartItems.find((item) => item.product_id === product.id)?.quantity || 1,
+    }));
 
     return handleResponse(
       res,
@@ -228,7 +232,7 @@ export const getCartProducts = async (req: AuthRequest, res: Response) => {
       'Success',
       true,
       undefined,
-      validCartProducts
+      cartProductsWithImages
     );
   } catch (error: any) {
     console.error('Error fetching cart items:', error);
@@ -237,7 +241,7 @@ export const getCartProducts = async (req: AuthRequest, res: Response) => {
       'Failed to fetch cart items',
       'Internal_Server_Error',
       false,
-      'Internal_Servr_Error'
+      'Internal_Server_Error'
     );
   }
 };
@@ -248,11 +252,20 @@ export const destroyCart = async (req: AuthRequest, res: Response) => {
     const cart = await knexInstance('cart')
       .where('user_id', req.user_id)
       .delete();
+    if (cart === 0) {
+      return handleResponse(
+        res,
+        'Cart is already empty',
+        'Not_Found',
+        false,
+        'Not_Found'
+      );
+    }
     return handleResponse(
       res,
       'Cart items deleted successfully',
       'Success',
-      true,
+      true
     );
   } catch (error: any) {
     console.error('Error deleting cart items:', error);
@@ -270,9 +283,13 @@ export const addquantity = async (req: AuthRequest, res: Response) => {
   try {
     const cartitem = await Cart.findbyid(req.body.id, req.user_id as string);
     if (!cartitem) {
-      return handleResponse(res,'Cart item not found',   'Not_Found',
+      return handleResponse(
+        res,
+        'Cart item not found',
+        'Not_Found',
         false,
-        'Not_Found' );
+        'Not_Found'
+      );
     }
     await cartitem.save(
       { quantity: (await cartitem.get('quantity')) + 1 },
@@ -282,7 +299,7 @@ export const addquantity = async (req: AuthRequest, res: Response) => {
       res,
       'Cart item updated successfully',
       'Success',
-      true, 
+      true,
       undefined,
       cartitem.toJSON()
     );
@@ -346,8 +363,25 @@ export const minusquantity = async (req: AuthRequest, res: Response) => {
 export const findProduct = async (req: Request, res: Response) => {
   try {
     const { id } = req.query;
-    const product = await Products.findbyid(id as string);
-    if (!product) {
+
+    const productWithImages = await knexInstance('products')
+      .select(
+        'products.id',
+        'products.title',
+        'products.description',
+        'products.price',
+        'products.discountPercentage',
+        'products.rating',
+        'products.stock',
+        'products.brand',
+        knexInstance.raw('GROUP_CONCAT(image.image_data) as images')
+      )
+      .innerJoin('image', 'products.id', '=', 'image.product_id')
+      .where('products.id', '=', Number(id))
+      .groupBy('products.id')
+      .first();
+
+    if (!productWithImages) {
       return handleResponse(
         res,
         'Product item not found',
@@ -356,21 +390,20 @@ export const findProduct = async (req: Request, res: Response) => {
         'Not_Found'
       );
     }
-    const images = await knexInstance('image')
-      .where({ product_id: product.id })
-      .select('image_data');
 
-    const productWithImages = {
-      id: await product.get('id'),
-      title: await product.get('title'),
-      description: await product.get('description'),
-      price: await product.get('price'),
-      discountPercentage: await product.get('discountPercentage'),
-      rating: await product.get('rating'),
-      stock: await product.get('stock'),
-      brand: await product.get('brand'),
-      thumbnail: `https://cdn.dummyjson.com/product-images/${product.id}/thumbnail.jpg`,
-      images: images.map((image) => image.image_data),
+    const productDetails = {
+      id: productWithImages.id,
+      title: productWithImages.title,
+      description: productWithImages.description,
+      price: productWithImages.price,
+      discountPercentage: productWithImages.discountPercentage,
+      rating: productWithImages.rating,
+      stock: productWithImages.stock,
+      brand: productWithImages.brand,
+      thumbnail: `https://cdn.dummyjson.com/product-images/${productWithImages.id}/thumbnail.jpg`,
+      images: productWithImages.images
+        ? productWithImages.images.split(',')
+        : [],
     };
 
     return handleResponse(
@@ -379,7 +412,7 @@ export const findProduct = async (req: Request, res: Response) => {
       'Success',
       true,
       'Success',
-      productWithImages
+      productDetails
     );
   } catch (error: any) {
     console.error('Error fetching product:', error);
@@ -388,7 +421,7 @@ export const findProduct = async (req: Request, res: Response) => {
       'Failed to find product',
       'Internal_Server_Error',
       false,
-      'Internal_Servr_Error'
+      'Internal_Server_Error'
     );
   }
 };
