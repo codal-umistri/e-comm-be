@@ -13,7 +13,7 @@ import os from 'os';
 cluster.schedulingPolicy = cluster.SCHED_RR;
 
 //total worker thread
-const totalCPUs = Math.min(os.cpus().length, 7); 
+const totalCPUs = Math.min(os.cpus().length, 4); 
 
 if (cluster.isPrimary) {
   for (let i = 0; i < totalCPUs; i++) {
