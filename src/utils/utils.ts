@@ -1,17 +1,19 @@
 import User from '../model/user_model';
 import { Code, ResponseObj, StatusCodeMap } from '../types/type';
 import jwt from 'jsonwebtoken';
-import { Response} from 'express';
+import { Response } from 'express';
+import { knexInstance } from '../config/dbconfig';
 
 const StatusCode: StatusCodeMap = {
-  'Success': 200,
-  'Created': 201,
-  'Conflict': 409,
-  'Not_Found': 404,
-  'Internal_Server_Error': 500,
-  'Unauthorized':401,
-  'Forbidden':403,
-  'Bad_Request' :400 
+  Success: 200,
+  Created: 201,
+  Conflict: 409,
+  Not_Found: 404,
+  Internal_Server_Error: 500,
+  Unauthorized: 401,
+  Forbidden: 403,
+  Bad_Request: 400,
+  Email_Error: 502
 };
 
 export const COUPENCODE: Code[] = [
@@ -42,31 +44,28 @@ export const handleResponse = (
   message: string,
   status: string,
   success: boolean,
-  error_code?:string,
+  error_code?: string,
   item?: any,
   itemname: string = 'item',
-  obj?:any
-  
+  obj?: any
 ) => {
-  let responseObj:ResponseObj;
+  let responseObj: ResponseObj;
 
-  error_code ? responseObj = { message , success, error_code} : responseObj = { message , success, error_code};
-  
+  error_code
+    ? (responseObj = { message, success, error_code })
+    : (responseObj = { message, success, error_code });
+
   if (item !== undefined) {
     responseObj[itemname] = item.toJSON ? item.toJSON() : item;
   }
-  if(obj){
+  if (obj) {
     responseObj.auth = obj;
   }
-  
+
   return res.status(StatusCode[status]).json(responseObj);
 };
 
-export const loginHelper = (
-  res: Response,
-  user: User,
-  IsLogin: number = 1,
-) => {
+export const loginHelper = (res: Response, user: User, IsLogin: number = 1) => {
   const secretKey = process.env.SECRET_KEY;
   const token = jwt.sign({ id: user.get('id') }, secretKey as string, {
     expiresIn: '2d',
@@ -83,9 +82,7 @@ export const loginHelper = (
       undefined,
       { token, name: user.get('first_name'), type: user.get('type') }
     );
-  }
-  else if(IsLogin === 0)
-  {
+  } else if (IsLogin === 0) {
     return handleResponse(
       res,
       'User registered successfully',
@@ -96,12 +93,25 @@ export const loginHelper = (
       'user',
       { token, name: user.get('first_name'), type: user.get('type') }
     );
-  }
-  else {
-    return handleResponse(res,'Seller registration successful.','Created', true,'Created',undefined,
-      undefined,{ token, name: user.get('first_name'), type: user.get('type') });
+  } else {
+    return handleResponse(
+      res,
+      'Seller registration successful.',
+      'Created',
+      true,
+      'Created',
+      undefined,
+      undefined,
+      { token, name: user.get('first_name'), type: user.get('type') }
+    );
   }
 };
+
+export function generateOtp() {
+  // Generate a 5-digit OTP code
+  return Math.floor(10000 + Math.random() * 90000).toString();
+}
+
 
 // export const handleDuplicate = async (
 //   req: Request,
@@ -116,3 +126,16 @@ export const loginHelper = (
 
 //   next();
 // };
+
+export async function destroy(hash: string) {
+  try {
+    const result = await knexInstance('otp').where({ otp_hash: hash }).del();
+    if (result) {
+      console.log('OTP deleted successfully');
+    } else {
+      console.log('OTP not found');
+    }
+  } catch (error) {
+    console.error('Error during OTP deletion:', error);
+  }
+}
